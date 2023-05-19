@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://car.gd" type="Script" id=1]
+[ext_resource path="res://car.tscn" type="PackedScene" id=2]
+[ext_resource path="res://camControls.gd" type="Script" id=3]
+[ext_resource path="res://label.gd" type="Script" id=4]
+[ext_resource path="res://tracks/track2.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.6204, 214.798 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="car" parent="." instance=ExtResource( 2 )]
+position = Vector2( -200.101, -789.079 )
+z_index = 1
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="car"]
+position = Vector2( 6.27972, -4.85869 )
+rotation = 3.14159
+scale = Vector2( 2.23011, -17.4455 )
+current = true
+zoom = Vector2( 2, 2 )
+limit_left = -2308
+limit_top = -1183
+limit_right = 2310
+limit_bottom = 1208
+smoothing_enabled = true
+smoothing_speed = 8.0
+script = ExtResource( 3 )
+
+[node name="track" type="Sprite" parent="."]
+position = Vector2( 12.4755, -13.9546 )
+scale = Vector2( 1.81332, 1.8999 )
+texture = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=[
+"gates",
+]]
+position = Vector2( -540.132, -750.017 )
+shape = SubResource( 1 )
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 36
+
+[node name="Control" type="Control" parent="."]
+visible = false
+margin_left = -3.05176e-05
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Laptime_label" type="Label" parent="Control"]
+margin_left = -83.4945
+margin_top = -933.437
+margin_right = 30.5055
+margin_bottom = -919.437
+rect_scale = Vector2( 3.69703, 7.25133 )
+text = "Last Time: 10.327"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+margin_left = 497.803
+margin_top = -933.381
+margin_right = 550.803
+margin_bottom = -919.381
+rect_scale = Vector2( 5.5692, 6.7007 )
+text = "Laps: 46"
+
+[connection signal="raceData" from="car" to="Control" method="_on_car_raceData"]
+[connection signal="body_entered" from="Area2D" to="car" method="_on_Area2D_body_entered"]

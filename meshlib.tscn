@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://stuff/line.material" type="Material" id=1]
+[ext_resource path="res://stuff/road_curve.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://stuff/road_straight.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://stuff/pavement.material" type="Material" id=4]
+[ext_resource path="res://stuff/asphaltEdge.material" type="Material" id=5]
+[ext_resource path="res://stuff/asphalt.material" type="Material" id=6]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="road" type="MeshInstance" parent="."]
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 1 )
+material/3 = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = ExtResource( 3 )
+material/0 = ExtResource( 6 )
+material/1 = ExtResource( 5 )
+material/2 = ExtResource( 1 )
+material/3 = ExtResource( 4 )
